@@ -1,1 +1,195 @@
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korean Grammar Lab</title>
+  <meta name="description" content="한국어 문법을 탐구하고 이해하는 오픈소스 학습 플랫폼">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Noto Sans KR", sans-serif;
+      background: #f7f8fa;
+      color: #202b3c;
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 22px 8%;
+      background: white;
+      border-bottom: 1px solid #e8ebf0;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      color: #244b80;
+    }
+
+    .hero {
+      padding: 90px 8% 75px;
+      background: #edf3fa;
+      text-align: center;
+    }
+
+    .tag {
+      color: #4776aa;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      margin: 20px 0;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.25;
+    }
+
+    .hero p {
+      color: #64748b;
+      font-size: 16px;
+    }
+
+    .section {
+      max-width: 1050px;
+      margin: auto;
+      padding: 65px 22px;
+    }
+
+    .section h2 {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #748094;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 27px;
+      border: 1px solid #e5e9ef;
+      border-radius: 13px;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #91afd0;
+    }
+
+    .card .number {
+      color: #4776aa;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: #788496;
+      font-size: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 17px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #eaf2fc;
+      color: #4776aa;
+      font-size: 12px;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      background: #202b3c;
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 65px 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Korean Grammar Lab</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="tag">LEARN · EXPLORE · ANALYZE</div>
+      <h1>Explore the Structure<br>of Korean Language</h1>
+      <p>한국어 문법을 암기하는 것을 넘어, 직접 탐구하고 이해합니다.</p>
+    </section>
+
+    <section class="section">
+      <h2>Explore Korean Grammar</h2>
+      <p class="description">
+        한국어의 다양한 문법 현상을 체계적으로 탐구해 보세요.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="number">01 / PHONOLOGY</div>
+          <h3>음운 변동</h3>
+          <p>교체, 탈락, 첨가, 축약 등 한국어 음운 현상을 탐구합니다.</p>
+          <span class="status">Coming Soon</span>
+        </article>
+
+        <article class="card">
+          <div class="number">02 / SYNTAX</div>
+          <h3>문장 성분</h3>
+          <p>문장의 구조와 각 성분의 문법적 기능을 분석합니다.</p>
+          <span class="status">Coming Soon</span>
+        </article>
+
+        <article class="card">
+          <div class="number">03 / VOICE</div>
+          <h3>피동과 사동</h3>
+          <p>피동문과 사동문의 구조 및 의미를 비교합니다.</p>
+          <span class="status">Coming Soon</span>
+        </article>
+
+        <article class="card">
+          <div class="number">04 / HONORIFICS</div>
+          <h3>높임 표현</h3>
+          <p>주체, 객체, 상대 높임의 체계를 살펴봅니다.</p>
+          <span class="status">Coming Soon</span>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Korean Grammar Lab · Open-Source Educational Project
+  </footer>
+</body>
+</html>
