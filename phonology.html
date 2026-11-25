@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phonology Lab | Korean Grammar Lab</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Noto Sans KR", sans-serif;
+  background: #f7f8fa;
+  color: #202b3c;
+  line-height: 1.7;
+}
+
+header {
+  background: white;
+  padding: 20px 8%;
+  border-bottom: 1px solid #e5e9ef;
+}
+
+header a {
+  color: #244b80;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.container {
+  max-width: 850px;
+  margin: auto;
+  padding: 55px 22px;
+}
+
+.tag {
+  color: #4776aa;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 12px 0;
+}
+
+.description {
+  color: #748094;
+  margin-bottom: 35px;
+}
+
+.panel {
+  background: white;
+  padding: 30px;
+  border: 1px solid #e5e9ef;
+  border-radius: 14px;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #4776aa;
+}
+
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  background: #244b80;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #19375e;
+}
+
+.result {
+  display: none;
+  margin-top: 25px;
+  padding: 25px;
+  background: #edf3fa;
+  border-radius: 10px;
+}
+
+.result h2 {
+  font-size: 25px;
+  color: #244b80;
+  margin-bottom: 10px;
+}
+
+.result p {
+  margin-top: 8px;
+}
+
+.examples {
+  margin-top: 25px;
+  color: #748094;
+  font-size: 14px;
+}
+
+.example {
+  display: inline-block;
+  margin: 5px 5px 0 0;
+  padding: 5px 12px;
+  background: #edf3fa;
+  border-radius: 20px;
+  color: #244b80;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #8792a2;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 29px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html">Korean Grammar Lab</a>
+</header>
+
+<main class="container">
+
+  <div class="tag">PHONOLOGY LAB · 01</div>
+
+  <h1>음운 변동 분석기</h1>
+
+  <p class="description">
+    한국어 단어의 발음과 음운 변동 현상을 탐구합니다.
+  </p>
+
+  <section class="panel">
+
+    <label for="word">분석할 단어를 입력하세요.</label>
+
+    <input
+      type="text"
+      id="word"
+      placeholder="예: 국물"
+      autocomplete="off"
+    >
+
+    <button onclick="analyze()">분석하기</button>
+
+    <div class="examples">
+      예시 단어:
+      <span class="example" onclick="setWord('국물')">국물</span>
+      <span class="example" onclick="setWord('밥물')">밥물</span>
+      <span class="example" onclick="setWord('같이')">같이</span>
+      <span class="example" onclick="setWord('신라')">신라</span>
+    </div>
+
+    <div class="result" id="result">
+      <h2 id="resultWord"></h2>
+      <p id="resultType"></p>
+      <p id="resultSound"></p>
+      <p id="resultExplanation"></p>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  Korean Grammar Lab · Phonology Explorer
+</footer>
+
+<script>
+const rules = {
+  "국물": {
+    sound: "[궁물]",
+    type: "비음화",
+    explanation:
+      "받침 ㄱ이 뒤에 오는 비음 ㅁ의 영향을 받아 비음 ㅇ으로 바뀝니다."
+  },
+
+  "밥물": {
+    sound: "[밤물]",
+    type: "비음화",
+    explanation:
+      "받침 ㅂ이 뒤에 오는 비음 ㅁ의 영향을 받아 비음 ㅁ으로 바뀝니다."
+  },
+
+  "같이": {
+    sound: "[가치]",
+    type: "구개음화",
+    explanation:
+      "받침 ㄷ 계열의 소리와 조사 또는 접미사의 ㅣ가 결합하면서 ㅈ으로 바뀝니다."
+  },
+
+  "신라": {
+    sound: "[실라]",
+    type: "유음화",
+    explanation:
+      "ㄴ이 뒤에 오는 ㄹ의 영향을 받아 ㄹ로 바뀝니다."
+  }
+};
+
+function setWord(word) {
+  document.getElementById("word").value = word;
+  analyze();
+}
+
+function analyze() {
+  const word = document.getElementById("word").value.trim();
+  const result = document.getElementById("result");
+
+  if (!word) {
+    alert("분석할 단어를 입력해 주세요.");
+    return;
+  }
+
+  if (rules[word]) {
+    document.getElementById("resultWord").textContent = word;
+    document.getElementById("resultType").textContent =
+      "음운 변동 유형: " + rules[word].type;
+    document.getElementById("resultSound").textContent =
+      "표준 발음: " + rules[word].sound;
+    document.getElementById("resultExplanation").textContent =
+      "분석 원리: " + rules[word].explanation;
+
+    result.style.display = "block";
+  } else {
+    document.getElementById("resultWord").textContent = word;
+    document.getElementById("resultType").textContent =
+      "현재 분석 데이터에 등록되지 않은 단어입니다.";
+    document.getElementById("resultSound").textContent =
+      "분석 결과를 제공할 수 없습니다.";
+    document.getElementById("resultExplanation").textContent =
+      "지원하는 예시 단어를 선택해 주세요.";
+    result.style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>
