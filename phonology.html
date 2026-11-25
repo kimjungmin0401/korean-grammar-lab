@@ -4,273 +4,426 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phonology Lab | Korean Grammar Lab</title>
-
+<title>음운 변동 분석기 | 한국어 문법 실험실</title>
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+* { box-sizing: border-box; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Noto Sans KR", sans-serif;
-  background: #f7f8fa;
-  color: #202b3c;
-  line-height: 1.7;
+  margin: 0;
+  background: #f5f7fb;
+  color: #202938;
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
 }
-
 header {
-  background: white;
-  padding: 20px 8%;
-  border-bottom: 1px solid #e5e9ef;
+  background: #263b61;
+  color: white;
+  padding: 27px 20px;
 }
-
-header a {
-  color: #244b80;
-  text-decoration: none;
-  font-weight: 800;
-}
-
-.container {
-  max-width: 850px;
-  margin: auto;
-  padding: 55px 22px;
-}
-
-.tag {
-  color: #4776aa;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-h1 {
-  font-size: 36px;
-  margin: 12px 0;
-}
-
-.description {
-  color: #748094;
-  margin-bottom: 35px;
-}
-
+header a { color: #dce8ff; text-decoration: none; }
+header h1 { margin: 15px 0 5px; font-size: 25px; }
+header p { margin: 0; color: #dce4f2; font-size: 14px; }
+main { max-width: 760px; margin: 28px auto; padding: 0 16px; }
 .panel {
   background: white;
-  padding: 30px;
-  border: 1px solid #e5e9ef;
-  border-radius: 14px;
+  border: 1px solid #e2e7ef;
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #1c2c4610;
 }
-
-label {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
+h2 { font-size: 18px; margin: 0 0 15px; }
+.description { color: #687386; font-size: 14px; line-height: 1.7; }
+.input-row { display: flex; gap: 9px; }
 input {
-  width: 100%;
-  padding: 15px;
-  font-size: 18px;
-  border: 1px solid #d8dee8;
-  border-radius: 8px;
-  outline: none;
-}
-
-input:focus {
-  border-color: #4776aa;
-}
-
-button {
-  width: 100%;
-  margin-top: 15px;
+  min-width: 0;
+  flex: 1;
   padding: 14px;
-  background: #244b80;
+  border: 1px solid #cbd3df;
+  border-radius: 9px;
+  font-size: 17px;
+}
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 17px;
+  background: #315b9b;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
 }
-
-button:hover {
-  background: #19375e;
+button:active { opacity: .8; }
+.examples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.examples button {
+  background: #edf2fa;
+  color: #315b9b;
+  padding: 8px 12px;
+  font-weight: 500;
 }
-
-.result {
-  display: none;
-  margin-top: 25px;
-  padding: 25px;
-  background: #edf3fa;
+.result { display: none; }
+.pronunciation {
+  background: #edf3ff;
+  padding: 18px;
   border-radius: 10px;
-}
-
-.result h2 {
-  font-size: 25px;
-  color: #244b80;
-  margin-bottom: 10px;
-}
-
-.result p {
-  margin-top: 8px;
-}
-
-.examples {
-  margin-top: 25px;
-  color: #748094;
-  font-size: 14px;
-}
-
-.example {
-  display: inline-block;
-  margin: 5px 5px 0 0;
-  padding: 5px 12px;
-  background: #edf3fa;
-  border-radius: 20px;
-  color: #244b80;
-  cursor: pointer;
-}
-
-footer {
   text-align: center;
-  padding: 25px;
-  color: #8792a2;
-  font-size: 13px;
+  margin: 12px 0 18px;
 }
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 29px;
-  }
-
-  .panel {
-    padding: 20px;
-  }
+.pronunciation small { color: #61718b; }
+.pronunciation strong {
+  display: block;
+  font-size: 29px;
+  color: #244f8d;
+  margin-top: 5px;
+}
+.rule {
+  border-left: 4px solid #7296ce;
+  background: #f7f9fc;
+  padding: 13px 15px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+}
+.rule strong { display: block; margin-bottom: 5px; }
+.rule p { margin: 0; font-size: 14px; line-height: 1.65; color: #536074; }
+.tag {
+  display: inline-block;
+  background: #e5edfb;
+  color: #315b9b;
+  border-radius: 20px;
+  padding: 4px 9px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.notice {
+  background: #fff8e9;
+  border: 1px solid #f1dfb5;
+  padding: 13px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #765b25;
+  margin-top: 15px;
+}
+footer { text-align: center; padding: 25px; color: #8490a1; font-size: 12px; }
+@media(max-width: 480px) {
+  .panel { padding: 17px; }
+  .input-row { flex-direction: column; }
+  .input-row button { width: 100%; }
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <a href="index.html">Korean Grammar Lab</a>
+  <a href="index.html">← 한국어 문법 실험실</a>
+  <h1>음운 변동 분석기</h1>
+  <p>한국어 발음의 변화와 그 원리를 탐구합니다.</p>
 </header>
 
-<main class="container">
-
-  <div class="tag">PHONOLOGY LAB · 01</div>
-
-  <h1>음운 변동 분석기</h1>
-
-  <p class="description">
-    한국어 단어의 발음과 음운 변동 현상을 탐구합니다.
-  </p>
-
+<main>
   <section class="panel">
-
-    <label for="word">분석할 단어를 입력하세요.</label>
-
-    <input
-      type="text"
-      id="word"
-      placeholder="예: 국물"
-      autocomplete="off"
-    >
-
-    <button onclick="analyze()">분석하기</button>
-
+    <h2>단어 입력</h2>
+    <p class="description">분석할 한글 단어를 입력하세요.</p>
+    <div class="input-row">
+      <input id="wordInput" type="text" placeholder="예: 국물, 같이, 신라">
+      <button onclick="analyze()">분석하기</button>
+    </div>
     <div class="examples">
-      예시 단어:
-      <span class="example" onclick="setWord('국물')">국물</span>
-      <span class="example" onclick="setWord('밥물')">밥물</span>
-      <span class="example" onclick="setWord('같이')">같이</span>
-      <span class="example" onclick="setWord('신라')">신라</span>
+      <button onclick="useExample('국물')">국물</button>
+      <button onclick="useExample('같이')">같이</button>
+      <button onclick="useExample('신라')">신라</button>
+      <button onclick="useExample('국밥')">국밥</button>
+      <button onclick="useExample('밥물')">밥물</button>
+      <button onclick="useExample('굳이')">굳이</button>
     </div>
-
-    <div class="result" id="result">
-      <h2 id="resultWord"></h2>
-      <p id="resultType"></p>
-      <p id="resultSound"></p>
-      <p id="resultExplanation"></p>
-    </div>
-
   </section>
 
+  <section class="panel result" id="result">
+    <h2>분석 결과</h2>
+    <div class="pronunciation">
+      <small>분석된 발음</small>
+      <strong id="pronunciation"></strong>
+    </div>
+    <h2>적용된 음운 변동</h2>
+    <div id="rules"></div>
+    <div class="notice" id="notice">
+      이 분석기는 주요 음운 규칙을 적용하는 초기 버전입니다.
+      형태소 정보나 단어별 예외가 필요한 경우 실제 표준 발음과 차이가 있을 수 있습니다.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>분석기의 적용 범위</h2>
+    <p class="description">
+      현재 구현된 규칙은 음절의 끝소리 규칙, 비음화, 유음화,
+      구개음화, 된소리되기, 거센소리되기 및 일부 자음군 단순화입니다.
+      모든 표준 발음과 예외를 처리하는 완전한 발음 사전은 아닙니다.
+    </p>
+  </section>
 </main>
 
-<footer>
-  Korean Grammar Lab · Phonology Explorer
-</footer>
+<footer>한국어 문법 실험실 · Open Source Project</footer>
 
 <script>
-const rules = {
-  "국물": {
-    sound: "[궁물]",
-    type: "비음화",
-    explanation:
-      "받침 ㄱ이 뒤에 오는 비음 ㅁ의 영향을 받아 비음 ㅇ으로 바뀝니다."
-  },
+const ONSETS = [
+  "ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ",
+  "ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"
+];
+const VOWELS = [
+  "ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ",
+  "ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"
+];
+const CODAS = [
+  "","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ",
+  "ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ",
+  "ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"
+];
 
-  "밥물": {
-    sound: "[밤물]",
-    type: "비음화",
-    explanation:
-      "받침 ㅂ이 뒤에 오는 비음 ㅁ의 영향을 받아 비음 ㅁ으로 바뀝니다."
+const ruleInfo = {
+  aspiration: {
+    name: "거센소리되기",
+    explanation: "ㅎ과 예사소리가 만나 거센소리로 바뀌는 현상입니다."
   },
-
-  "같이": {
-    sound: "[가치]",
-    type: "구개음화",
-    explanation:
-      "받침 ㄷ 계열의 소리와 조사 또는 접미사의 ㅣ가 결합하면서 ㅊ으로 바뀝니다."
+  palatal: {
+    name: "구개음화",
+    explanation: "받침 ㄷ, ㅌ이 형식 형태소 이 앞에서 각각 ㅈ, ㅊ으로 바뀌는 현상입니다."
   },
-
-  "신라": {
-    sound: "[실라]",
-    type: "유음화",
-    explanation:
-      "ㄴ이 뒤에 오는 ㄹ의 영향을 받아 ㄹ로 바뀝니다."
+  liquid: {
+    name: "유음화",
+    explanation: "ㄴ과 ㄹ이 만날 때 두 소리가 모두 ㄹ로 바뀌는 현상입니다."
+  },
+  nasal: {
+    name: "비음화",
+    explanation: "받침의 장애음이 비음 ㄴ, ㅁ 등의 영향을 받아 비음으로 바뀌는 현상입니다."
+  },
+  tense: {
+    name: "된소리되기",
+    explanation: "일정한 환경에서 예사소리가 된소리로 바뀌는 현상입니다."
+  },
+  final: {
+    name: "음절의 끝소리 규칙",
+    explanation: "음절 끝의 자음이 대표음 ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅇ 중 하나로 실현되는 현상입니다."
+  },
+  cluster: {
+    name: "자음군 단순화",
+    explanation: "겹받침에서 한 자음이 탈락하여 하나의 자음만 발음되는 현상입니다."
   }
 };
 
-function setWord(word) {
-  document.getElementById("word").value = word;
-  analyze();
+function decompose(word) {
+  return [...word].map(ch => {
+    const code = ch.charCodeAt(0) - 0xAC00;
+    if (code < 0 || code > 11171) return { raw: ch };
+
+    return {
+      onset: ONSETS[Math.floor(code / 588)],
+      vowel: VOWELS[Math.floor((code % 588) / 28)],
+      coda: CODAS[code % 28]
+    };
+  });
+}
+
+function compose(s) {
+  if (s.raw !== undefined) return s.raw;
+  const code = 0xAC00 +
+    ONSETS.indexOf(s.onset) * 588 +
+    VOWELS.indexOf(s.vowel) * 28 +
+    CODAS.indexOf(s.coda);
+  return String.fromCharCode(code);
+}
+
+function render(syllables) {
+  return syllables.map(compose).join("");
+}
+
+function addRule(log, key, before, after) {
+  log.push({ key, before, after });
+}
+
+function analyzeWord(word) {
+  const s = decompose(word);
+  const log = [];
+
+  if (s.some(x => x.raw !== undefined)) {
+    return { error: "한글 단어만 입력해 주세요." };
+  }
+
+  // 1. 거센소리되기
+  for (let i = 0; i < s.length - 1; i++) {
+    const a = s[i], b = s[i + 1];
+    const before = render(s);
+
+    const aspirate = { "ㄱ":"ㅋ", "ㄷ":"ㅌ", "ㅂ":"ㅍ", "ㅈ":"ㅊ" };
+
+    if (a.coda && aspirate[a.coda] && b.onset === "ㅎ") {
+      b.onset = aspirate[a.coda];
+      a.coda = "";
+      addRule(log, "aspiration", before, render(s));
+    } else if (a.coda === "ㅎ" && aspirate[b.onset]) {
+      a.coda = "";
+      b.onset = aspirate[b.onset];
+      addRule(log, "aspiration", before, render(s));
+    } else if (a.coda === "ㅎ" && b.onset === "ㅅ") {
+      a.coda = "";
+      b.onset = "ㅆ";
+      addRule(log, "aspiration", before, render(s));
+    }
+  }
+
+  // 2. 구개음화
+  // 단어 표기만으로 형태소 경계를 확정할 수 없으므로
+  // 대표적인 형태소 결합 사례에 한해 적용한다.
+  const palatalWords = ["같이", "굳이", "밭이"];
+  if (palatalWords.includes(word)) {
+    for (let i = 0; i < s.length - 1; i++) {
+      const a = s[i], b = s[i + 1];
+      if ((a.coda === "ㄷ" || a.coda === "ㅌ") &&
+          b.onset === "ㅇ" && b.vowel === "ㅣ") {
+        const before = render(s);
+        b.onset = a.coda === "ㄷ" ? "ㅈ" : "ㅊ";
+        a.coda = "";
+        addRule(log, "palatal", before, render(s));
+      }
+    }
+  }
+
+  // 3. 자음군 단순화: 뒤에 자음이 오는 경우의 일부 대표 유형
+  const clusterMap = {
+    "ㄳ":"ㄱ", "ㄵ":"ㄴ", "ㄶ":"ㄴ",
+    "ㄺ":"ㄱ", "ㄻ":"ㅁ", "ㄼ":"ㄹ",
+    "ㄽ":"ㄹ", "ㄾ":"ㄹ", "ㄿ":"ㅂ",
+    "ㅀ":"ㄹ", "ㅄ":"ㅂ"
+  };
+
+  for (let i = 0; i < s.length - 1; i++) {
+    const a = s[i], b = s[i + 1];
+    if (clusterMap[a.coda] && b.onset !== "ㅇ") {
+      const before = render(s);
+      a.coda = clusterMap[a.coda];
+      addRule(log, "cluster", before, render(s));
+    }
+  }
+
+  // 4. 유음화
+  for (let i = 0; i < s.length - 1; i++) {
+    const a = s[i], b = s[i + 1];
+    if ((a.coda === "ㄴ" && b.onset === "ㄹ") ||
+        (a.coda === "ㄹ" && b.onset === "ㄴ")) {
+      const before = render(s);
+      a.coda = "ㄹ";
+      b.onset = "ㄹ";
+      addRule(log, "liquid", before, render(s));
+    }
+  }
+
+  // 5. 비음화
+  for (let i = 0; i < s.length - 1; i++) {
+    const a = s[i], b = s[i + 1];
+    const before = render(s);
+
+    const nasalMap = {
+      "ㄱ":"ㅇ", "ㄲ":"ㅇ", "ㅋ":"ㅇ",
+      "ㄷ":"ㄴ", "ㅅ":"ㄴ", "ㅆ":"ㄴ",
+      "ㅈ":"ㄴ", "ㅊ":"ㄴ", "ㅌ":"ㄴ",
+      "ㅂ":"ㅁ", "ㅍ":"ㅁ"
+    };
+
+    if ((b.onset === "ㄴ" || b.onset === "ㅁ") &&
+        nasalMap[a.coda]) {
+      a.coda = nasalMap[a.coda];
+      addRule(log, "nasal", before, render(s));
+    } else if (b.onset === "ㄹ" &&
+        ["ㄱ","ㄲ","ㅋ","ㄷ","ㅅ","ㅆ","ㅈ","ㅊ","ㅌ","ㅂ","ㅍ"].includes(a.coda)) {
+      a.coda = nasalMap[a.coda];
+      b.onset = "ㄴ";
+      addRule(log, "nasal", before, render(s));
+    }
+  }
+
+  // 6. 된소리되기
+  const tenseMap = {
+    "ㄱ":"ㄲ", "ㄷ":"ㄸ", "ㅂ":"ㅃ", "ㅅ":"ㅆ", "ㅈ":"ㅉ"
+  };
+  const tenseCodas = ["ㄱ","ㄲ","ㄳ","ㄺ","ㄷ","ㅂ","ㅄ","ㄵ","ㄶ","ㄼ","ㄾ","ㄿ","ㅀ","ㄴ","ㅁ","ㅇ","ㄹ"];
+
+  for (let i = 0; i < s.length - 1; i++) {
+    const a = s[i], b = s[i + 1];
+    if (tenseCodas.includes(a.coda) && tenseMap[b.onset]) {
+      const before = render(s);
+      b.onset = tenseMap[b.onset];
+      addRule(log, "tense", before, render(s));
+    }
+  }
+
+  // 7. 음절 끝소리 규칙
+  const finalMap = {
+    "ㄲ":"ㄱ", "ㅋ":"ㄱ", "ㄳ":"ㄱ", "ㄺ":"ㄱ",
+    "ㅅ":"ㄷ", "ㅆ":"ㄷ", "ㅈ":"ㄷ", "ㅊ":"ㄷ",
+    "ㅌ":"ㄷ", "ㅎ":"ㄷ", "ㄵ":"ㄴ", "ㄶ":"ㄴ",
+    "ㄼ":"ㄹ", "ㄽ":"ㄹ", "ㄾ":"ㄹ", "ㅀ":"ㄹ",
+    "ㅍ":"ㅂ", "ㅄ":"ㅂ", "ㄿ":"ㅂ", "ㄻ":"ㅁ"
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    const a = s[i];
+    if (finalMap[a.coda]) {
+      const before = render(s);
+      a.coda = finalMap[a.coda];
+      addRule(log, "final", before, render(s));
+    }
+  }
+
+  return { pronunciation: render(s), log };
 }
 
 function analyze() {
-  const word = document.getElementById("word").value.trim();
+  const input = document.getElementById("wordInput");
+  const word = input.value.trim();
   const result = document.getElementById("result");
+  const rules = document.getElementById("rules");
 
   if (!word) {
     alert("분석할 단어를 입력해 주세요.");
     return;
   }
 
-  if (rules[word]) {
-    document.getElementById("resultWord").textContent = word;
-    document.getElementById("resultType").textContent =
-      "음운 변동 유형: " + rules[word].type;
-    document.getElementById("resultSound").textContent =
-      "표준 발음: " + rules[word].sound;
-    document.getElementById("resultExplanation").textContent =
-      "분석 원리: " + rules[word].explanation;
+  const data = analyzeWord(word);
+  result.style.display = "block";
 
-    result.style.display = "block";
-  } else {
-    document.getElementById("resultWord").textContent = word;
-    document.getElementById("resultType").textContent =
-      "현재 분석 데이터에 등록되지 않은 단어입니다.";
-    document.getElementById("resultSound").textContent =
-      "분석 결과를 제공할 수 없습니다.";
-    document.getElementById("resultExplanation").textContent =
-      "지원하는 예시 단어를 선택해 주세요.";
-    result.style.display = "block";
+  if (data.error) {
+    document.getElementById("pronunciation").textContent = data.error;
+    rules.innerHTML = "";
+    return;
   }
-}
-</script>
 
+  document.getElementById("pronunciation").textContent =
+    "[" + data.pronunciation + "]";
+
+  if (data.log.length === 0) {
+    rules.innerHTML =
+      '<p class="description">현재 구현된 규칙에서 적용되는 음운 변동을 찾지 못했습니다.</p>';
+    return;
+  }
+
+  rules.innerHTML = data.log.map((item, index) => {
+    const info = ruleInfo[item.key];
+    return `
+      <div class="rule">
+        <span class="tag">과정 ${index + 1}</span>
+        <strong>${info.name}</strong>
+        <p>${item.before} → ${item.after}</p>
+        <p>${info.explanation}</p>
+      </div>
+    `;
+  }).join("");
+}
+
+function useExample(word) {
+  document.getElementById("wordInput").value = word;
+  analyze();
+}
+
+document.getElementById("wordInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") analyze();
+});
+</script>
 </body>
 </html>
